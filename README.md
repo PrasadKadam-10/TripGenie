@@ -100,10 +100,7 @@ ScaleDown API
 Context Compression
 Pixel / Image API
 Destination Image Fetching
----
-``` 
-
-
+--- 
 
 
 
