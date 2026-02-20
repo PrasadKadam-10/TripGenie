@@ -40,6 +40,10 @@ Unlike basic recommendation systems, this project:
 - 🧪 Fully Custom Backend (No LangChain dependency)
 
 ---
+``` 
+
+
+
 User Query
    ↓
 SentenceTransformer Embedding
@@ -53,6 +57,11 @@ Context Compression (ScaleDown)
 LLM Generation (Groq)
    ↓
 Structured JSON + Destination Images
+
+``` 
+
+
+
 ---
 
 🛠️ Actual Tech Stack (Project Accurate)
