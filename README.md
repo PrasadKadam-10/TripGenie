@@ -119,10 +119,9 @@ TripGenie/
 │   ├─ requirements.txt
 │   ├─ runtime.txt
 │   └─ .env
-└─ frontend/ (optional)
+└─ frontend/ 
 ---
 ```
-
 Create a ".env" file inside the backend folder:
 
 GROQ_API_KEY=your_groq_api_key
