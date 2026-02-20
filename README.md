@@ -1,45 +1,40 @@
-✈️ TripGenie – Custom RAG-Based Travel Assistant
+✈️ TripGenie – AI Travel Assistant
 
-<p align="center">
-  <img src="https://img.shields.io/badge/STATUS-PRODUCTION_READY-brightgreen?style=for-the-badge"/>
-  <img src="https://img.shields.io/badge/ARCHITECTURE-CUSTOM_RAG-blueviolet?style=for-the-badge"/>
-  <img src="https://img.shields.io/badge/BACKEND-FLASK_API-orange?style=for-the-badge"/>
-  <img src="https://img.shields.io/badge/LLM-GROQ_LLAMA3.1-red?style=for-the-badge"/>
-</p>---
 
-<h2 align="center">🌍 AI-Powered Intelligent Travel Itinerary Generator</h2><p align="center">
-A fully custom Retrieval-Augmented Generation (RAG) Travel Assistant that generates structured, context-aware travel itineraries using semantic search, compressed knowledge retrieval, and LLM-based generation.
-</p>---
 
-🧠 Project Overview
 
-TripGenie is an advanced AI travel planning assistant built with a custom RAG pipeline instead of heavy frameworks like LangChain.
-It retrieves real contextual travel data from a self-built vector database, compresses it efficiently, and generates intelligent itineraries using a high-speed LLM.
 
-Unlike basic recommendation systems, this project:
 
-- Uses a local FAISS vector database (not generic APIs)
-- Retrieves semantic travel knowledge chunks
-- Compresses context using ScaleDown API
-- Generates detailed itineraries using Groq LLM
-- Enriches results with destination images via Pixel API
 
----
 
-🚀 Core Features (Actual Implementation)
+🌍 What is TripGenie?
 
-- 🔎 Semantic Search using FAISS Vector Database
-- 🧩 Custom Chunking & Retrieval System
-- 🧠 Retrieval-Augmented Generation (RAG) Pipeline
-- ⚡ Ultra-fast LLM generation via Groq (Llama 3.1)
-- 🗜️ Context Compression using ScaleDown API
-- 🖼️ Dynamic Image Enrichment using Pixel API
-- 📊 Structured JSON Travel Itinerary Output
-- 🌐 REST API Backend (Flask + CORS)
-- 📁 Self-built Travel Dataset (.txt based)
-- 🧪 Fully Custom Backend (No LangChain dependency)
+TripGenie is an AI-powered travel itinerary generator built with a custom RAG pipeline.
+It retrieves real travel knowledge from a self-built FAISS vector database, compresses context, and generates structured, image-enriched itineraries.
 
----
+Why it’s different:
+
+Custom FAISS-based semantic search
+
+No heavy frameworks like LangChain
+
+Context compression via ScaleDown API
+
+LLM-powered itinerary generation (Groq Llama 3.1)
+
+Destination images via Pixel API
+
+🚀 Core Features
+Feature	Description
+🔎 Semantic Search	FAISS vector database retrieval
+🧩 Chunking	Custom chunking logic for text
+🧠 RAG Pipeline	Context + LLM-based itinerary
+⚡ LLM Generation	Groq Llama 3.1 (fast & smart)
+🗜️ Context Compression	ScaleDown API
+🖼️ Image Enrichment	Pixel API for destination images
+📊 Output	Structured JSON itineraries
+🌐 Backend	REST API (Flask + CORS)
+🏗️ How It Works
 User Query
    ↓
 SentenceTransformer Embedding
@@ -53,40 +48,13 @@ Context Compression (ScaleDown)
 LLM Generation (Groq)
    ↓
 Structured JSON + Destination Images
----
+🛠️ Tech Stack
 
-🛠️ Actual Tech Stack (Project Accurate)
+Backend: Python 3.12 + Flask + NumPy
+AI / RAG: SentenceTransformers, FAISS, custom chunking, pickle storage
+External APIs: Groq, ScaleDown, Pixel
 
-<h3 align="center">🖥️ Backend Technologies</h3><p align="center">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" height="50"/>
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" height="50"/>
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" height="50"/>
-</p>- Python 3.12
-- Flask (REST API Server)
-- Flask-CORS
-- Requests
-- Python-dotenv
-
----
-"
-<h3 align="center">🤖 AI / RAG Components</h3>- SentenceTransformers (all-MiniLM-L6-v2) – Embeddings
-- FAISS (CPU) – Vector Search Engine
-- NumPy – Embedding Processing
-- Custom Chunking Logic (chunker.py)
-- Pickle-based Chunk Storage (chunks.pkl)
-"
----
-"
-<h3 align="center">🔌 External APIs (ONLY APIs USED)</h3>API| Purpose
-Groq API| LLM Itinerary Generation (Llama 3.1 8B Instant)
-ScaleDown API| Context Compression
-Pixel / Image API| Destination Image Fetching
-"
----
-
-📁 Real Project Structure (Based on Your Backend)
-'''
----
+📁 Project Structure
 TripGenie/
 ├─ backend/
 │   ├─ app.py
@@ -102,133 +70,54 @@ TripGenie/
 │   ├─ runtime.txt
 │   └─ .env
 └─ frontend/ (optional)
----
-'''
-🔑 Environment Variables (Very Important)
+⚙️ Installation & Run
 
-Create a ".env" file inside the backend folder:
-
-GROQ_API_KEY=your_groq_api_key
-SCALEDOWN_API_KEY=your_scaledown_api_key
-PIXEL_API_KEY=your_pixel_api_key
-
-⚠️ Never push ".env" file to GitHub for security reasons.
-
----
-
-⚙️ Installation Guide (Step-by-Step)
-
-1️⃣ Clone the Repository
+1️⃣ Clone & navigate:
 
 git clone https://github.com/yourusername/TripGenie.git
 cd TripGenie/backend
 
-2️⃣ Create Virtual Environment
+2️⃣ Setup virtual environment:
 
 python -m venv venv
-
-Activate (Windows):
-
+# Windows
 venv\Scripts\activate
 
-3️⃣ Install Dependencies
+3️⃣ Install dependencies:
 
 pip install -r requirements.txt
 
-Or manual install:
-
-pip install flask flask-cors faiss-cpu numpy requests sentence-transformers python-dotenv
-
----
-
-🧱 Building the FAISS Vector Index (Mandatory Step)
-
-Since the system uses a custom dataset, you must generate the vector database before running the server.
-
-Run:
+4️⃣ Build FAISS index:
 
 python build_index.py
 
-This will automatically generate:
-
-- "travel_index.faiss" → Vector Search Index
-- "chunks.pkl" → Chunked dataset + metadata
-
-Example Output:
-
-FAISS index built successfully with travel dataset vectors
-Chunks stored in chunks.pkl
-
----
-
-▶️ Running the Backend Server
-
-Navigate to:
-
-TripGenie/backend
-
-Then start the Flask server:
+5️⃣ Run server:
 
 python app.py
 
-Server will run on:
+Access at: http://127.0.0.1:5000
 
-http://127.0.0.1:5000
-
----
-
-🌐 API Endpoint (Core RAG Endpoint)
-
-Method| Endpoint| Description
-POST| /generate-itinerary| Generates AI travel plan using RAG
-
-Input:
+API Endpoint: POST /generate-itinerary
 
 {
   "destination": "Goa",
   "days": 3,
   "budget": "medium"
 }
+🔮 Future Plans
 
-Output:
+React frontend integration
 
-- Structured JSON itinerary
-- Day-wise planning
-- Image enriched response
+User personalization
 
----
+Multi-destination itinerary planning
 
-🎯 Key Innovations in This Project
+Cloud deployment (Render / AWS)
 
-- Custom RAG pipeline without LangChain
-- Self-built FAISS vector database
-- Context compression before LLM (cost optimized)
-- Lightweight yet scalable architecture
-- Real dataset-driven travel recommendations
-- API-first modular backend design
-
----
-
-🔮 Future Improvements
-
-- Frontend React Integration
-- User personalization memory
-- Budget-based smart filtering
-- Multi-destination itinerary planning
-- Cloud deployment (Render / AWS)
-- Larger semantic travel dataset
-
----
+Expanded travel dataset
 
 👨‍💻 Author
 
-Prasad Dilip Kadam
-B.Tech IT Engineer | AI & RAG System Developer
-Frontend Developer – Cyber Arena Project
-Passionate about AI Systems, RAG Pipelines & Web Technology
+Prasad Dilip Kadam – B.Tech IT | AI & RAG Developer | Frontend Developer – Cyber Arena Project
 
----
-
-<p align="center">
-⭐ If you find this project innovative, consider starring the repository!
-</p>
+⭐ Star the repo if you find it useful!
