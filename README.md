@@ -89,8 +89,8 @@ Structured JSON + Destination Images
 - Pickle-based Chunk Storage (chunks.pkl) "
 
 ---
-``` 
 
+``` 
 🔌 External APIs 
 API
 Purpose
@@ -107,7 +107,6 @@ Destination Image Fetching
 
 
 
-📁 Real Project Structure (Based on Your Backend)
 ```
 TripGenie/
 ├─ backend/
@@ -123,9 +122,9 @@ TripGenie/
 │   ├─ requirements.txt
 │   ├─ runtime.txt
 │   └─ .env
-└─ frontend/ 
+└─ frontend/ (optional)
 ---
-``` 
+```
 
 Create a ".env" file inside the backend folder:
 
