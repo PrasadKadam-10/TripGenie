@@ -91,25 +91,14 @@ Pixel / Image API| Destination Image Fetching
 📁 Real Project Structure (Based on Your Backend)
 
 TripGenie/
-│
-├── backend/
-│   ├── app.py                # Main Flask RAG server
-│   ├── build_index.py        # FAISS index builder
-│   ├── scraper.py            # Travel dataset scraper
-│   ├── chunker.py            # Text chunking logic
-│   ├── chunks.py             # Chunk loader (pickle)
-│   ├── fias.py               # FAISS utility module
-│   │
-│   ├── data/                 # Travel text dataset (.txt files)
-│   ├── travel_index.faiss    # Vector database (FAISS)
-│   ├── chunks.pkl            # Stored chunks + metadata
-│   │
-│   ├── requirements.txt
-│   ├── runtime.txt
-│   ├── .env                  # API keys (ignored in Git)
-│   └── venv/                 # Virtual environment (ignored)
-│
-└── frontend/ (if connected)
+├── backend/                  # Core RAG Backend (Flask)
+│   ├── data/                 # Custom travel dataset
+│   ├── app.py                # Main API server (RAG pipeline)
+│   ├── build_index.py        # FAISS vector index generator
+│   ├── chunker.py            # Text chunking system
+│   ├── chunks.pkl            # Serialized chunk storage
+│   ├── travel_index.faiss    # FAISS vector database
+│   └── requirements.txt
 
 ---
 
