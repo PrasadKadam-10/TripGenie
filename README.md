@@ -40,23 +40,19 @@ Unlike basic recommendation systems, this project:
 - 🧪 Fully Custom Backend (No LangChain dependency)
 
 ---
-
-🏗️ Complete System Architecture Flow
-
 User Query
    ↓
-SentenceTransformer Embedding (all-MiniLM-L6-v2)
+SentenceTransformer Embedding
    ↓
-FAISS Semantic Search (travel_index.faiss)
+FAISS Semantic Search
    ↓
-Top-K Chunk Retrieval (chunks.pkl)
+Top-K Chunk Retrieval
    ↓
-Context Compression (ScaleDown API)
+Context Compression (ScaleDown)
    ↓
-LLM Generation (Groq API – Llama 3.1 8B Instant)
+LLM Generation (Groq)
    ↓
-Structured JSON Itinerary + Destination Images (Pixel API)
-
+Structured JSON + Destination Images
 ---
 
 🛠️ Actual Tech Stack (Project Accurate)
@@ -89,29 +85,23 @@ Pixel / Image API| Destination Image Fetching
 ---
 
 📁 Real Project Structure (Based on Your Backend)
-"
+
 
 TripGenie/
-│
-├── backend/
-│   ├── app.py                # Main Flask RAG server
-│   ├── build_index.py        # FAISS index builder
-│   ├── scraper.py            # Travel dataset scraper
-│   ├── chunker.py            # Text chunking logic
-│   ├── chunks.py             # Chunk loader (pickle)
-│   ├── fias.py               # FAISS utility module
-│   │
-│   ├── data/                 # Travel text dataset (.txt files)
-│   ├── travel_index.faiss    # Vector database (FAISS index)
-│   ├── chunks.pkl            # Stored chunks + metadata
-│   │
-│   ├── requirements.txt      # Python dependencies
-│   ├── runtime.txt           # Deployment runtime config
-│   ├── .env                  # Environment variables (ignored)
-│   └── venv/                 # Virtual environment (ignored)
-│
-└── frontend/ (optional if integrated)
-"
+├─ backend/
+│   ├─ app.py
+│   ├─ build_index.py
+│   ├─ scraper.py
+│   ├─ chunker.py
+│   ├─ chunks.py
+│   ├─ fias.py
+│   ├─ data/
+│   ├─ travel_index.faiss
+│   ├─ chunks.pkl
+│   ├─ requirements.txt
+│   ├─ runtime.txt
+│   └─ .env
+└─ frontend/ (optional)
 ---
 
 🔑 Environment Variables (Very Important)
