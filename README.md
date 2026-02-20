@@ -78,7 +78,8 @@ Structured JSON + Destination Images
 
 ---
 "``` 
-<h3 align="center">🤖 AI / RAG Components</h3>- SentenceTransformers (all-MiniLM-L6-v2) – Embeddings
+<h3 align="center">``` 
+🤖 AI / RAG Components</h3>- SentenceTransformers (all-MiniLM-L6-v2) – Embeddings
 - FAISS (CPU) – Vector Search Engine
 - NumPy – Embedding Processing
 - Custom Chunking Logic (chunker.py)
@@ -123,7 +124,7 @@ GROQ_API_KEY=your_groq_api_key
 SCALEDOWN_API_KEY=your_scaledown_api_key
 PIXEL_API_KEY=your_pixel_api_key
 
-⚠️ Never push ".env" file to GitHub for security reasons.
+havent push ".env" file to GitHub for security reasons.
 
 ---
 
@@ -234,10 +235,7 @@ Output:
 👨‍💻 Author
 
 Prasad Dilip Kadam
-B.Tech IT Engineer | AI & RAG System Developer
-Frontend Developer – Cyber Arena Project
-Passionate about AI Systems, RAG Pipelines & Web Technology
-
+B.Tech IT Engineer
 ---
 
 <p align="center">
