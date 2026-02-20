@@ -1,0 +1,19 @@
+# Environment variables (API KEYS)
+.env
+
+# Virtual environment
+venv/
+backend/venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pkl
+
+# FAISS index 
+*.faiss
+
+# OS files
+.DS_Store
+Thumbs.db
+

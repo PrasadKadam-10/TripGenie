@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payana — India Travel AI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #f5f0e8;
+      --sand: #e8dcc8;
+      --rust: #c4622d;
+      --saffron: #e8a020;
+      --deep: #1a1410;
+      --muted: #6b5e50;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--deep);
+      overflow-x: hidden;
+    }
+
+    .serif { font-family: 'Cormorant Garamond', serif; }
+    .mono { font-family: 'Space Mono', monospace; }
+
+    /* Grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.5;
+    }
+
+    /* NAVBAR */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(245, 240, 232, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(196, 98, 45, 0.15);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      color: var(--deep);
+    }
+
+    .nav-logo span { color: var(--rust); font-style: italic; }
+
+    .nav-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 2.5rem;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--rust); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 5rem;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem 3rem 5rem 5rem;
+    }
+
+    .hero-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--rust);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .hero-tag::before {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: var(--rust);
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 6vw, 6rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--deep);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--rust);
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 420px;
+      margin-bottom: 3rem;
+      font-weight: 300;
+    }
+
+    .search-bar {
+      display: flex;
+      background: white;
+      border: 1px solid rgba(196, 98, 45, 0.25);
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(26, 20, 16, 0.1);
+      max-width: 500px;
+    }
+
+    .search-bar input {
+      flex: 1;
+      padding: 1.1rem 1.5rem;
+      border: none;
+      outline: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      background: transparent;
+      color: var(--deep);
+    }
+
+    .search-bar input::placeholder { color: #bbb; }
+
+    .search-btn {
+      background: var(--rust);
+      color: white;
+      border: none;
+      padding: 1rem 1.8rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s;
+      white-space: nowrap;
+    }
+
+    .search-btn:hover { background: #a84f22; }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--deep);
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* HERO RIGHT - mosaic */
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mosaic {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+      height: 100%;
+      gap: 4px;
+    }
+
+    .mosaic-item {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .mosaic-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+
+    .mosaic-item:hover img { transform: scale(1.06); }
+
+    .mosaic-item.tall { grid-row: span 2; }
+
+    .mosaic-label {
+      position: absolute;
+      bottom: 0.75rem;
+      left: 0.75rem;
+      background: rgba(26,20,16,0.7);
+      color: white;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.6rem;
+      border-radius: 2px;
+    }
+
+    /* CATEGORIES */
+    .categories {
+      padding: 6rem 5rem;
+      background: var(--deep);
+    }
+
+    .section-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--saffron);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-tag::before {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: var(--saffron);
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      font-weight: 300;
+      color: var(--cream);
+      margin-bottom: 3rem;
+    }
+
+    .section-title em { font-style: italic; color: var(--saffron); }
+
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.5rem;
+    }
+
+    .cat-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      text-decoration: none;
+    }
+
+    .cat-card:hover {
+      background: rgba(196, 98, 45, 0.15);
+      border-color: var(--rust);
+      transform: translateY(-4px);
+    }
+
+    .cat-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .cat-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 0.4rem;
+    }
+
+    .cat-desc {
+      font-size: 0.75rem;
+      color: rgba(245,240,232,0.45);
+      letter-spacing: 0.05em;
+    }
+
+    /* TRENDING */
+    .trending {
+      padding: 6rem 5rem;
+      background: var(--cream);
+    }
+
+    .trending-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 300px 220px;
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+
+    .trend-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .trend-card.big { grid-row: span 2; }
+
+    .trend-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+
+    .trend-card:hover img { transform: scale(1.08); }
+
+    .trend-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(26,20,16,0.75) 0%, transparent 50%);
+    }
+
+    .trend-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem;
+    }
+
+    .trend-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: white;
+      line-height: 1.2;
+    }
+
+    .trend-card.big .trend-name { font-size: 2.2rem; }
+
+    .trend-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--saffron);
+      margin-top: 0.3rem;
+    }
+
+    .trend-card .plan-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(245,240,232,0.9);
+      color: var(--deep);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.8rem;
+      border-radius: 2px;
+      border: none;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .trend-card:hover .plan-btn { opacity: 1; }
+
+    /* CTA STRIP */
+    .cta-strip {
+      padding: 5rem;
+      background: linear-gradient(135deg, var(--rust) 0%, #a84f22 50%, #8a3d18 100%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .cta-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 300;
+      color: white;
+      line-height: 1.2;
+    }
+
+    .cta-text em { font-style: italic; opacity: 0.75; }
+
+    .cta-btn {
+      background: white;
+      color: var(--rust);
+      padding: 1.1rem 2.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.3s;
+    }
+
+    .cta-btn:hover {
+      background: var(--deep);
+      color: white;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 3rem 5rem;
+      background: var(--deep);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      color: var(--cream);
+      font-weight: 300;
+      letter-spacing: 0.15em;
+    }
+
+    footer .logo span { color: var(--saffron); font-style: italic; }
+
+    footer p {
+      font-size: 0.75rem;
+      color: rgba(245,240,232,0.35);
+      letter-spacing: 0.05em;
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-up { animation: fadeUp 0.8s ease forwards; }
+    .fade-up-2 { animation: fadeUp 0.8s 0.15s ease forwards; opacity: 0; }
+    .fade-up-3 { animation: fadeUp 0.8s 0.3s ease forwards; opacity: 0; }
+    .fade-up-4 { animation: fadeUp 0.8s 0.45s ease forwards; opacity: 0; }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { height: 50vh; }
+      .hero-left { padding: 4rem 2rem; }
+      .cat-grid { grid-template-columns: repeat(3, 1fr); }
+      .trending-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .trend-card.big { grid-row: span 1; }
+      nav { padding: 1rem 1.5rem; }
+      .categories, .trending, .cta-strip, footer { padding: 4rem 2rem; }
+    }
+
+    @media (max-width: 640px) {
+      .cat-grid { grid-template-columns: repeat(2, 1fr); }
+      .trending-grid { grid-template-columns: 1fr; }
+      .cta-strip { flex-direction: column; text-align: center; }
+      .hero-stats { gap: 1.5rem; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-logo">PAYA<span>NA</span></div>
+  <div class="nav-links">
+    <a href="#categories">Explore</a>
+    <a href="#trending">Destinations</a>
+    <a href="/chat">AI Planner</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag fade-up">India Travel Intelligence</div>
+
+    <h1 class="hero-title fade-up-2">
+      Discover<br>
+      <em>Incredible</em><br>
+      India
+    </h1>
+
+    <p class="hero-sub fade-up-3">
+      Your AI travel companion for exploring India's 36 states and union territories —
+      from Himalayan peaks to tropical coasts, ancient temples to royal cities.
+    </p>
+
+    <div class="search-bar fade-up-4">
+      <input
+        type="text"
+        id="heroSearch"
+        placeholder="Where in India do you want to go?"
+        onkeydown="if(event.key==='Enter') startChat()"
+      />
+      <button class="search-btn" onclick="startChat()">Plan Trip →</button>
+    </div>
+
+    <div class="hero-stats fade-up-4">
+      <div>
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Destinations</div>
+      </div>
+      <div>
+        <div class="stat-num">28</div>
+        <div class="stat-label">States covered</div>
+      </div>
+      <div>
+        <div class="stat-num">AI</div>
+        <div class="stat-label">Powered plans</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="mosaic">
+      <div class="mosaic-item tall">
+        <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=800&q=80" alt="Taj Mahal">
+        <div class="mosaic-label">Taj Mahal, Agra</div>
+      </div>
+      <div class="mosaic-item">
+        <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80" alt="Kerala backwaters">
+        <div class="mosaic-label">Kerala</div>
+      </div>
+      <div class="mosaic-item">
+        <img src="https://images.unsplash.com/photo-1598091383021-15ddea10925d?w=800&q=80" alt="Varanasi">
+        <div class="mosaic-label">Varanasi</div>
+      </div>
+      <div class="mosaic-item">
+        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80" alt="Himalayas">
+        <div class="mosaic-label">Himalayas</div>
+      </div>
+      <div class="mosaic-item">
+        <img src="https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80" alt="agra">
+        <div class="mosaic-label">Agra</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section id="categories" class="categories">
+  <div class="section-tag">Browse by type</div>
+  <h2 class="section-title">What calls <em>to you?</em></h2>
+
+  <div class="cat-grid">
+    <a href="/chat" onclick="setQuery('Best beach destinations in India')" class="cat-card">
+      <div class="cat-icon">🏖️</div>
+      <div class="cat-name">Beaches</div>
+      <div class="cat-desc">Goa · Andamans · Kerala</div>
+    </a>
+    <a href="/chat" onclick="setQuery('Best mountain destinations in India for trekking')" class="cat-card">
+      <div class="cat-icon">🏔️</div>
+      <div class="cat-name">Mountains</div>
+      <div class="cat-desc">Himalayas · Spiti · Leh</div>
+    </a>
+    <a href="/chat" onclick="setQuery('Famous temples to visit in India')" class="cat-card">
+      <div class="cat-icon">🛕</div>
+      <div class="cat-name">Temples</div>
+      <div class="cat-desc">Varanasi · Tirupati · Madurai</div>
+    </a>
+    <a href="/chat" onclick="setQuery('Heritage cities and historical places in India')" class="cat-card">
+      <div class="cat-icon">🏰</div>
+      <div class="cat-name">Heritage</div>
+      <div class="cat-desc">Jaipur · Agra · Hampi</div>
+    </a>
+    <a href="/chat" onclick="setQuery('Best wildlife sanctuaries and national parks in India')" class="cat-card">
+      <div class="cat-icon">🐯</div>
+      <div class="cat-name">Wildlife</div>
+      <div class="cat-desc">Ranthambore · Kaziranga · Corbett</div>
+    </a>
+  </div>
+</section>
+
+<!-- TRENDING -->
+<section id="trending" class="trending">
+  <div class="section-tag">Trending now</div>
+  <h2 class="section-title" style="color: var(--deep);">Destinations <em>worth exploring</em></h2>
+
+  <div class="trending-grid">
+    <div class="trend-card big" onclick="planTrip('Plan a complete trip to Rajasthan covering Jaipur, Jodhpur and Jaisalmer')">
+      <img src="https://images.unsplash.com/photo-1587474260584-136574528ed5?w=1200&q=80" alt="Rajasthan">
+      <div class="trend-overlay"></div>
+      <div class="trend-info">
+        <div class="trend-name">Rajasthan</div>
+        <div class="trend-tag">Royal Heritage · Desert · Forts</div>
+      </div>
+      <button class="plan-btn">Plan this trip →</button>
+    </div>
+
+    <div class="trend-card" onclick="planTrip('Plan a backwaters trip to Kerala with houseboat experience')">
+      <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80" alt="Kerala">
+      <div class="trend-overlay"></div>
+      <div class="trend-info">
+        <div class="trend-name">Kerala</div>
+        <div class="trend-tag">Backwaters · Ayurveda</div>
+      </div>
+      <button class="plan-btn">Plan this trip →</button>
+    </div>
+
+    <div class="trend-card" onclick="planTrip('Plan a Leh Ladakh road trip itinerary')">
+      <img src="https://images.unsplash.com/photo-1504233529578-6d46baba6d34?w=800&q=80" alt="Ladakh">
+      <div class="trend-overlay"></div>
+      <div class="trend-info">
+        <div class="trend-name">Ladakh</div>
+        <div class="trend-tag">Mountains · Adventure</div>
+      </div>
+      <button class="plan-btn">Plan this trip →</button>
+    </div>
+
+    <div class="trend-card" onclick="planTrip('Plan a Goa beach vacation itinerary')">
+      <img src="https://images.unsplash.com/photo-1614082242765-7c98ca0f3df3?w=800&q=80" alt="Goa">
+      <div class="trend-overlay"></div>
+      <div class="trend-info">
+        <div class="trend-name">Goa</div>
+        <div class="trend-tag">Beaches · Nightlife</div>
+      </div>
+      <button class="plan-btn">Plan this trip →</button>
+    </div>
+
+    <div class="trend-card" onclick="planTrip('Plan a spiritual trip to Varanasi')">
+      <img src="https://images.unsplash.com/photo-1561361058-c24cecae35ca?w=800&q=80" alt="Varanasi">
+      <div class="trend-overlay"></div>
+      <div class="trend-info">
+        <div class="trend-name">Varanasi</div>
+        <div class="trend-tag">Spiritual · Ghats</div>
+      </div>
+      <button class="plan-btn">Plan this trip →</button>
+    </div>
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<section class="cta-strip">
+  <div class="cta-text">
+    Ready to plan your<br><em>perfect India journey?</em>
+  </div>
+  <a href="/chat" class="cta-btn">Open AI Planner →</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">PAYA<span>NA</span></div>
+  <p>© 2026 Payana. AI-powered India travel planning.</p>
+</footer>
+
+<script>
+  function startChat() {
+    const q = document.getElementById('heroSearch').value.trim();
+    if (q) {
+      localStorage.setItem('travel_query', q);
+    }
+    window.location.href = '/chat';
+  }
+
+  function planTrip(query) {
+    localStorage.setItem('travel_query', query);
+    window.location.href = '/chat';
+  }
+
+  function setQuery(query) {
+    localStorage.setItem('travel_query', query);
+  }
+</script>
+</body>
+</html>
