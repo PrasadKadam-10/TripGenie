@@ -76,8 +76,11 @@ Structured JSON + Destination Images
 - Requests
 - Python-dotenv
 
+
+
+``` 
 ---
-"``` 
+
 <h3 align="center">``` 
 🤖 AI / RAG Components</h3>- SentenceTransformers (all-MiniLM-L6-v2) – Embeddings
 - FAISS (CPU) – Vector Search Engine
