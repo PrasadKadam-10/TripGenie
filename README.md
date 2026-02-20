@@ -85,8 +85,8 @@ Pixel / Image API| Destination Image Fetching
 ---
 
 📁 Real Project Structure (Based on Your Backend)
-
-
+"
+---
 TripGenie/
 ├─ backend/
 │   ├─ app.py
@@ -103,7 +103,7 @@ TripGenie/
 │   └─ .env
 └─ frontend/ (optional)
 ---
-
+"
 🔑 Environment Variables (Very Important)
 
 Create a ".env" file inside the backend folder:
