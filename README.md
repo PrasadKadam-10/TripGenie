@@ -83,9 +83,7 @@ Structured JSON + Destination Images
 - FAISS (CPU) – Vector Search Engine
 - NumPy – Embedding Processing
 - Custom Chunking Logic (chunker.py)
-- Pickle-based Chunk Storage (chunks.pkl)
-
-``` "
+- Pickle-based Chunk Storage (chunks.pkl) "
 
 ---
 ``` 
@@ -95,8 +93,12 @@ Groq API| LLM Itinerary Generation (Llama 3.1 8B Instant)
 ScaleDown API| Context Compression
 Pixel / Image API| Destination Image Fetching
 "
-``` 
 ---
+``` 
+
+
+
+
 
 📁 Real Project Structure (Based on Your Backend)
 ```
