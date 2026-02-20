@@ -72,23 +72,24 @@ Structured JSON Itinerary + Destination Images (Pixel API)
 - Python-dotenv
 
 ---
-
+"
 <h3 align="center">🤖 AI / RAG Components</h3>- SentenceTransformers (all-MiniLM-L6-v2) – Embeddings
 - FAISS (CPU) – Vector Search Engine
 - NumPy – Embedding Processing
 - Custom Chunking Logic (chunker.py)
 - Pickle-based Chunk Storage (chunks.pkl)
-
+"
 ---
-
+"
 <h3 align="center">🔌 External APIs (ONLY APIs USED)</h3>API| Purpose
 Groq API| LLM Itinerary Generation (Llama 3.1 8B Instant)
 ScaleDown API| Context Compression
 Pixel / Image API| Destination Image Fetching
-
+"
 ---
 
 📁 Real Project Structure (Based on Your Backend)
+"
 
 TripGenie/
 │
@@ -110,7 +111,7 @@ TripGenie/
 │   └── venv/                 # Virtual environment (ignored)
 │
 └── frontend/ (optional if integrated)
-
+"
 ---
 
 🔑 Environment Variables (Very Important)
