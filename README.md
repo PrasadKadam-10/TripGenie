@@ -91,14 +91,10 @@ Structured JSON + Destination Images
 ---
 
 🔌 External APIs 
-API
-Purpose
-Groq API
-LLM Itinerary Generation (Llama 3.1 8B Instant)
-ScaleDown API
-Context Compression
-Pixel / Image API
-Destination Image Fetching
+API Purpose
+Groq API - LLM Itinerary Generation (Llama 3.1 8B Instant)
+ScaleDown API - Context Compression
+Pixel / Image API - Destination Image Fetching
 ``` 
 --- 
 
