@@ -81,8 +81,8 @@ Structured JSON + Destination Images
 ``` 
 ---
 
-<h3 align="center">``` 
-🤖 AI / RAG Components</h3>- SentenceTransformers (all-MiniLM-L6-v2) – Embeddings </h3>
+
+🤖 AI / RAG Components</h3>- SentenceTransformers (all-MiniLM-L6-v2) – Embeddings 
 - FAISS (CPU) – Vector Search Engine
 - NumPy – Embedding Processing
 - Custom Chunking Logic (chunker.py)
@@ -90,7 +90,6 @@ Structured JSON + Destination Images
 
 ---
 
-``` 
 🔌 External APIs 
 API
 Purpose
