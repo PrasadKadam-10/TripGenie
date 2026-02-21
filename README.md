@@ -82,7 +82,7 @@ Structured JSON + Destination Images
 ---
 
 <h3 align="center">``` 
-🤖 AI / RAG Components</h3>- SentenceTransformers (all-MiniLM-L6-v2) – Embeddings
+🤖 AI / RAG Components</h3>- SentenceTransformers (all-MiniLM-L6-v2) – Embeddings </h3>
 - FAISS (CPU) – Vector Search Engine
 - NumPy – Embedding Processing
 - Custom Chunking Logic (chunker.py)
@@ -100,6 +100,7 @@ ScaleDown API
 Context Compression
 Pixel / Image API
 Destination Image Fetching
+``` 
 --- 
 
 
